@@ -9,6 +9,7 @@ CONFIG = YAML.load_file('./secrets/secrets.yml')
 date = Date.today-2
 
 FILE_DIR = './csv'
+Dir.mkdir(FILE_DIR) unless File.exists?(FILE_DIR)
 
 file_date = date.strftime("%Y%m")
 csv_file_name = "reviews_#{CONFIG["package_name"]}_#{file_date}.csv"
@@ -86,7 +87,6 @@ end
 
 Dir["#{FILE_DIR}/*"].each do |file_name|
   next if File.directory? file_name
-   
 	CSV.foreach(file_name, encoding: 'bom|utf-16le', headers: true) do |row|
 	  # If there is no reply - push this review
 	  if row[11].nil?
@@ -104,7 +104,6 @@ Dir["#{FILE_DIR}/*"].each do |file_name|
     	})
  	 end
 	end
-
 end
 
 Review.send_reviews_from_date(date)
