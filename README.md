@@ -29,7 +29,7 @@ It is intended to be fired once a day via cron.
 
   You will need to provide:
   - report bucket id. Found in the Reviews page of Google Play Developer console, e.g. `pubsite_prod_rev_01234567890987654321`
-  - package name, eg `com.example.reader`, found in the Google Play Developer console. You can also use a wildcard to get aggregated reviews of all apps sharing the same same package name prefix. (eg: 'com.example.*').
+  - package name, eg `com.example.reader`, found in the Google Play Developer console. You can also use a wildcard to get aggregated reviews of all apps sharing the same same package name prefix. (eg: `com.example.*`).
   - slack incoming webhook url, create new one via [direct link](https://slack.com/services/new/incoming-webhook) once you've logged in to the slack
 
 2. configure [gsutil](https://github.com/GoogleCloudPlatform/gsutil/). It’s a python app from Google, instructions provided below.
@@ -39,7 +39,7 @@ It is intended to be fired once a day via cron.
 ### Gsutil configuration
 1. Run `gsutil/gsutil config` and follow the steps.
 2. Once done, there will be a .boto file in your home dir.
-3. Copy this file to the ./secrets folder and you are good to go.
+3. Copy this file to the `./secrets` folder and you are good to go.
 
 You can always get the latest gsutil(https://cloud.google.com/storage/docs/gsutil_install) and change this line
 `system “BOTO_PATH=./secrets/.boto gsutil/gsutil cp -r gs://#{CONFIG[“app_repo”]}/reviews/#{csv_file_name} .”`
