@@ -29,7 +29,7 @@ It is intended to be fired once a day via cron.
 
   You will need to provide:
   - report bucket id. Found in the Reviews page of Google Play Developer console, e.g. `pubsite_prod_rev_01234567890987654321`
-  - package name, eg `com.example.reader`, found in the Google Play Developer console
+  - package name, eg `com.example.reader`, found in the Google Play Developer console. You can also use a wildcard to get aggregated reviews of all apps sharing the same same package name prefix. (eg: 'com.example.*').
   - slack incoming webhook url, create new one via [direct link](https://slack.com/services/new/incoming-webhook) once you've logged in to the slack
 
 2. configure [gsutil](https://github.com/GoogleCloudPlatform/gsutil/). It’s a python app from Google, instructions provided below.
