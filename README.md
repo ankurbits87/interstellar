@@ -1,5 +1,5 @@
 # Interstellar
-Small ruby app to get reviews for you Google Play Store-released application to the Slack channel.
+Small ruby app to get reviews for you Google Play Store-released application to a Slack channel or by email.
 
 ![slack](https://raw.githubusercontent.com/meduza-corp/interstellar/master/slack_screenshot.jpg?token=AAyQJbZeASPCKj8YppJQFsOTtR8FLUeDks5U5ysrwA%3D%3D)
 
@@ -19,7 +19,7 @@ Plus, you want a good rating in the Google Play Store, right?
 ## How it works
 Google Play [exports](https://support.google.com/googleplay/android-developer/answer/138230) all your app reviews once a day to the [Google Cloud Storage](https://cloud.google.com/storage/docs) bucket.
 
-_Interstellar_ downloads reviews via google-provided [gsutil](https://cloud.google.com/storage/docs/gsutil) tool and triggers [Slack incoming webhook](https://api.slack.com/incoming-webhooks) for all new or updated reviews.
+_Interstellar_ downloads reviews via google-provided [gsutil](https://cloud.google.com/storage/docs/gsutil) tool then sends you and emain and/or triggers [Slack incoming webhook](https://api.slack.com/incoming-webhooks) for all new or updated reviews.
 
 It is intended to be fired once a day via cron.
 
@@ -31,6 +31,8 @@ It is intended to be fired once a day via cron.
   - report bucket id. Found in the Reviews page of Google Play Developer console, e.g. `pubsite_prod_rev_01234567890987654321`
   - package name, eg `com.example.reader`, found in the Google Play Developer console
   - slack incoming webhook url, create new one via [direct link](https://slack.com/services/new/incoming-webhook) once you've logged in to the slack
+  - SMTP configuration
+  - Number of days to gather in the report
 
 2. configure [gsutil](https://github.com/GoogleCloudPlatform/gsutil/). It’s a python app from Google, instructions provided below.
 
@@ -47,6 +49,8 @@ to point it to whatever place you like. Keep in mind though, that the `sender.rb
 
 ## Usage
 Once configured - run `ruby sender.rb`
+If you leave `slack_url` empty in `secrets/secrets.yml`, Slack won't be used to send the reviews.
+If you leave `smtp_address` empty in `secrets/secrets.yml`, Email won't be used to send the reviews.
 
 ## License
 This piece of software is distributed under 2-clause BSD license.
